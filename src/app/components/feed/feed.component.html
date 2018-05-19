@@ -1,0 +1,36 @@
+<div *ngIf="denuncias?.length > 0; else noDenuncias">
+  <ul>
+    <li *ngFor="let denuncia of denuncias">
+      <div class="card border-primary m-3">
+        <h3 class="card-header">{{ denuncia.titulo }}</h3>
+        <div class="card-body">
+          <h5 class="card-title">Special title treatment</h5>
+          <h6 class="card-subtitle text-muted">Support card subtitle</h6>
+        </div>
+        <div class="card-body">
+          <p class="card-text">{{ denuncia.descricao }}</p>
+        </div>
+        <div class="card-body" *ngIf="denuncia.categorias.length > 0">
+          <ng-container *ngFor="let categoria of denuncia.categorias" [ngSwitch]="categoria">
+            <span *ngSwitchCase="0" class="badge badge-primary mr-1 mb-1">Categoria {{ categoria }}</span>
+            <span *ngSwitchCase="1" class="badge badge-secondary mr-1 mb-1">Categoria {{ categoria }}</span>
+            <span *ngSwitchCase="2" class="badge badge-success mr-1 mb-1">Categoria {{ categoria }}</span>
+            <span *ngSwitchCase="3" class="badge badge-danger mr-1 mb-1">Categoria {{ categoria }}</span>
+            <span *ngSwitchDefault></span>
+          </ng-container>
+          <br>
+          <button type="button" class="btn btn-primary">Primary</button>
+          <button type="button" class="btn btn-outline-secondary ml-1" (click)="deleteDenuncia($event, denuncia)">Deletar</button>
+        </div>
+        <div class="card-footer text-muted">
+          <!--{{ denuncia.data }}-->
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<ng-template #noDenuncias>
+  <hr>
+  <h5>Não há denúncias.</h5>
+</ng-template>
